@@ -1,57 +1,76 @@
-const $textarea = document.getElementById('input-encrip')
-const $encrip = document.getElementById('encrip')
-const $desencrip = document.getElementById('desencrip')
-const $textEncryp = document.querySelector('.text-encrip')
-const $btnCopy = document.querySelector('.btn__copi')
+const $textarea = document.getElementById("input-encrip");
+const $encrip = document.getElementById("encrip");
+const $desencrip = document.getElementById("desencrip");
+const $textEncryp = document.querySelector(".text-encrip");
+const $btnCopy = document.querySelector(".btn__copi");
+const $sectionText = document.querySelector(".section-text");
 
-
-$encrip.addEventListener('click',()=>{
-  let letter = $textarea.value.toLowerCase()
-  if(letter === ''){
-    return $textarea.focus()
+$encrip.addEventListener("click", () => {
+  let letter = $textarea.value.toLowerCase();
+  if (letter === "") {
+    return $textarea.focus();
   }
 
   const sinAcentos = letter.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   const reglas = {
-    'e': 'enter',
-    'i': 'imes',
-    'a': 'ai',
-    'o': 'ober',
-    'u': 'ufat'
+    e: "enter",
+    i: "imes",
+    a: "ai",
+    o: "ober",
+    u: "ufat",
   };
 
   // Aplicar las reglas de encriptación al texto
-  const encrypText = sinAcentos.replace(/[aeiou]/g, letra => reglas[letra] || letra);
-  $textarea.value = ''
-  $textEncryp.textContent = encrypText
-})
+  const encrypText = sinAcentos.replace(
+    /[aeiou]/g,
+    (letra) => reglas[letra] || letra
+  );
+  $textarea.value = "";
+  $textEncryp.textContent = encrypText;
+});
 
-$desencrip.addEventListener('click',()=>{
-  let letter = $textarea.value.toLowerCase()
-  
-  if(letter === ''){
-    return $textarea.focus()
+$desencrip.addEventListener("click", () => {
+  let letter = $textarea.value.toLowerCase();
+
+  if (letter === "") {
+    return $textarea.focus();
   }
 
   const reglasInversas = {
-    'enter': 'e',
-    'imes': 'i',
-    'ai': 'a',
-    'ober': 'o',
-    'ufat': 'u'
+    enter: "e",
+    imes: "i",
+    ai: "a",
+    ober: "o",
+    ufat: "u",
   };
 
-  let descryp = ''
-  descryp += letter.replace(/(enter|imes|ai|ober|ufat)/g, match => reglasInversas[match] || match);
-  $textarea.value = ''
-  $textEncryp.textContent = descryp
-})
+  let descryp = "";
+  descryp += letter.replace(
+    /(enter|imes|ai|ober|ufat)/g,
+    (match) => reglasInversas[match] || match
+  );
+  $textarea.value = "";
+  $textEncryp.textContent = descryp;
+});
 
-$btnCopy.addEventListener('click', async()=>{
-    try {
-      await navigator.clipboard.writeText($textEncryp.textContent);
-      console.log('Contenido copiado al portapapeles');
-    } catch (err) {
-      console.error('Error al copiar: ', err);
-    } 
-})
+$btnCopy.addEventListener("click", async () => {
+  const copyElement = `
+      <div class="info">
+        <div class="info__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none"><path fill="#393a37" d="m12 1.5c-5.79844 0-10.5 4.70156-10.5 10.5 0 5.7984 4.70156 10.5 10.5 10.5 5.7984 0 10.5-4.7016 10.5-10.5 0-5.79844-4.7016-10.5-10.5-10.5zm.75 15.5625c0 .1031-.0844.1875-.1875.1875h-1.125c-.1031 0-.1875-.0844-.1875-.1875v-6.375c0-.1031.0844-.1875.1875-.1875h1.125c.1031 0 .1875.0844.1875.1875zm-.75-8.0625c-.2944-.00601-.5747-.12718-.7808-.3375-.206-.21032-.3215-.49305-.3215-.7875s.1155-.57718.3215-.7875c.2061-.21032.4864-.33149.7808-.3375.2944.00601.5747.12718.7808.3375.206.21032.3215.49305.3215.7875s-.1155.57718-.3215.7875c-.2061.21032-.4864.33149-.7808.3375z"></path></svg>
+        </div>
+        <div class="info__title">texto copiado</div>
+        <div class="info__close"><svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z" fill="#393a37"></path></svg></div>
+    </div>
+  `;
+  try {
+    await navigator.clipboard.writeText($textEncryp.textContent);
+    $sectionText.insertAdjacentHTML('beforeend',copyElement)
+    $copyClass = document.querySelector('.info')
+    setTimeout(() => {
+      $sectionText.removeChild($copyClass)
+    }, 2000);
+  } catch (err) {
+    console.error("Error al copiar: ", err);
+  }
+});
