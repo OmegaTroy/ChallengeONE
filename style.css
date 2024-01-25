@@ -2,22 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scrollbar-width: none;
-  scrollbar-color: #4953df ;
 }
-
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 11px;
-  }
-
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background-color: #4953df;
-  }
 
 body{
   display: flex;
@@ -28,6 +13,7 @@ body{
 }
 
 .encrip-main{
+  position: relative;
   width: 70%;
   height: 95%;
   border-radius: 10px;
@@ -240,34 +226,80 @@ body{
 }
 
 .text-encrip{
+  width:80%;
+  height:200px;
   color: #A0C8C3;
   font-size: 1.4rem;
   padding: 15px;
   font-family: Menlo,Roboto Mono,monospace;
-  overflow: auto;
-  height: 23vh;
-}
-
+  overflow:hidden;
+  white-space:break-spaces;
+  text-overflow: ellipsis;
+} 
 
 .btn__traslate {
-  background: none;
-  position: relative;
-  top: 18%;
-  border: none;
-  padding: 15px 15px;
-  border-radius: 10px;
-  cursor: pointer;
+
+  --plus_sideLength: 2.5rem;
+  --plus_topRightTriangleSideLength: 0.9rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  width: var(--plus_sideLength);
+  height: var(--plus_sideLength);
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.btn__traslate::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+  border-style: solid;
+  border-color: transparent white transparent transparent;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
 }
 
 .btn__traslate:hover {
-  background: rgba(0, 0, 0, 0.575);
-  transition: .8s;
+  cursor: pointer;
 }
 
-.btn__traslate svg {
-  color: #fafafa;
+.btn__traslate:hover::before {
+  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
 }
 
+.btn__traslate:focus-visible::before {
+  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+}
+
+.btn__traslate>.icon {
+  color: white;
+  width: calc(var(--plus_sideLength) * 0.7);
+  height: calc(var(--plus_sideLength) * 0.7);
+  z-index: 1;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
+}
+
+.btn__traslate:hover>.icon {
+  color: black;
+
+  transform: rotate(180deg);
+}
+
+.btn__traslate:focus-visible>.icon {
+  color: black;
+  transform: rotate(180deg);
+}
 
 /* styles button copy */
 .btn__copi {
@@ -332,6 +364,7 @@ body{
 }
 
 .info {
+  position: absolute;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   width: 320px;
   padding: 12px;

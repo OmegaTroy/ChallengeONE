@@ -70,12 +70,16 @@ $btnCopy.addEventListener("click", async () => {
     </div>
   `;
   try {
-    await navigator.clipboard.writeText($textEncryp.textContent);
     $sectionText.insertAdjacentHTML("beforeend", copyElement);
-    $copyClass = document.querySelector(".info");
+    const $infoTitle = document.querySelector('.info__title')
+    $textEncryp.textContent == '' 
+    ? $infoTitle.textContent = 'no ahi texto para copiar' 
+    : $infoTitle.textContent='texto copiado'
+    await navigator.clipboard.writeText($textEncryp.textContent);
     setTimeout(() => {
+      $copyClass = document.querySelector(".info");
       $sectionText.removeChild($copyClass);
-    }, 2000);
+    }, 3000);
   } catch (err) {
     console.error("Error al copiar: ", err);
   }
@@ -85,5 +89,6 @@ $btnCopy.addEventListener("click", async () => {
 
 //button traslate
 $btnTraslate.addEventListener('click',()=>{
+  if(!$textEncryp.textContent) return
   $textarea.value = $textEncryp.textContent
 })
