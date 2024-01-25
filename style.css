@@ -2,7 +2,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-width: none;
+  scrollbar-color: #4953df ;
 }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 11px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #4953df;
+  }
 
 body{
   display: flex;
@@ -29,7 +44,7 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px 0;
+  gap: 20px 0;
   background-color: #4C8891;
 }
 
@@ -38,7 +53,7 @@ body{
   border: none;
   color: #444;
   font-size: 1.4rem;
-  height: 20vh;
+  height: 19vh;
   padding: .5rem 2rem;
   margin: 0 0 4px 0;
   display: block;
@@ -229,12 +244,35 @@ body{
   font-size: 1.4rem;
   padding: 15px;
   font-family: Menlo,Roboto Mono,monospace;
+  overflow: auto;
+  height: 23vh;
 }
+
+
+.btn__traslate {
+  background: none;
+  position: relative;
+  top: 18%;
+  border: none;
+  padding: 15px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn__traslate:hover {
+  background: rgba(0, 0, 0, 0.575);
+  transition: .8s;
+}
+
+.btn__traslate svg {
+  color: #fff;
+}
+
 
 /* styles button copy */
 .btn__copi {
-  width: 100px;
-  height: 35px;
+  width: 135px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
