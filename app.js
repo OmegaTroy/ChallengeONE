@@ -5,6 +5,7 @@ const $textEncryp = document.querySelector(".text-encrip");
 const $btnCopy = document.querySelector(".btn__copi");
 const $sectionText = document.querySelector(".section-text");
 const $btnTraslate = document.querySelector(".btn__traslate");
+const $btnDelete = document.querySelector(".btn__delete");
 
 
 // button encryp
@@ -91,4 +92,10 @@ $btnCopy.addEventListener("click", async () => {
 $btnTraslate.addEventListener('click',()=>{
   if(!$textEncryp.textContent) return
   $textarea.value = $textEncryp.textContent
+})
+
+$btnDelete.addEventListener('click',()=>{
+  $textarea.value = '',
+  $textarea.focus()
+  $textEncryp.textContent = ''
 })
