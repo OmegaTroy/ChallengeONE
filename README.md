@@ -2,12 +2,12 @@ Proyecto de encriptado de texto, echo para el desafio de Challenge ONE Principia
 Echo con Html, Css y JavaScript.
 Diseño minimalista pensado para no agobiar al usuario
 
-Desktop
+- Desktop
 ![Modo Escritorio](/img/desafioOne.png)
 
-Tablet
+- Tablet
 ![Modo Tablet](/img/603shots_so.png)
 
-Mobile
+- Mobile
 ![Modo mobil](/img/875shots_so.png)
 
