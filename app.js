@@ -7,7 +7,6 @@ const $sectionText = document.querySelector(".section-text");
 const $btnTraslate = document.querySelector(".btn__traslate");
 const $btnDelete = document.querySelector(".btn__delete");
 
-
 // button encryp
 $encrip.addEventListener("click", () => {
   let textareaValue = $textarea.value.toLowerCase();
@@ -15,8 +14,10 @@ $encrip.addEventListener("click", () => {
     return $textarea.focus();
   }
 
-  const withoutAccents = textareaValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  const character = withoutAccents.replace(/[^a-zA-Z\s]/g , "");
+  const withoutAccents = textareaValue
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  const character = withoutAccents.replace(/[^a-zA-Z\s]/g, "");
 
   const rules = {
     e: "enter",
@@ -59,7 +60,6 @@ $desencryp.addEventListener("click", () => {
   $textEncryp.textContent = descryp;
 });
 
-
 // button copy
 $btnCopy.addEventListener("click", async () => {
   const copyElement = `
@@ -72,10 +72,10 @@ $btnCopy.addEventListener("click", async () => {
   `;
   try {
     $sectionText.insertAdjacentHTML("beforeend", copyElement);
-    const $infoTitle = document.querySelector('.info__title')
-    $textEncryp.textContent == '' 
-    ? $infoTitle.textContent = 'no ahi texto para copiar' 
-    : $infoTitle.textContent='texto copiado'
+    const $infoTitle = document.querySelector(".info__title");
+    $textEncryp.textContent == ""
+      ? ($infoTitle.textContent = "no ahi texto para copiar")
+      : ($infoTitle.textContent = "texto copiado");
     await navigator.clipboard.writeText($textEncryp.textContent);
     setTimeout(() => {
       $copyClass = document.querySelector(".info");
@@ -86,16 +86,13 @@ $btnCopy.addEventListener("click", async () => {
   }
 });
 
-
-
 //button traslate
-$btnTraslate.addEventListener('click',()=>{
-  if(!$textEncryp.textContent) return
-  $textarea.value = $textEncryp.textContent
-})
+$btnTraslate.addEventListener("click", () => {
+  if (!$textEncryp.textContent) return;
+  $textarea.value = $textEncryp.textContent;
+});
 
-$btnDelete.addEventListener('click',()=>{
-  $textarea.value = '',
-  $textarea.focus()
-  $textEncryp.textContent = ''
-})
+$btnDelete.addEventListener("click", () => {
+  ($textarea.value = ""), $textarea.focus();
+  $textEncryp.textContent = "";
+});
