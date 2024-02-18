@@ -39,6 +39,7 @@ body {
 }
 
 #input-encrip {
+  text-transform: lowercase;
   outline: none;
   border: none;
   color: #444;
